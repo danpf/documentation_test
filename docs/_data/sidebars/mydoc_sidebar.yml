@@ -1,0 +1,21 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: sidebar
+  product: Jekyll Doc Theme
+  version: 6.0
+  folders:
+
+  - title: Rosetta & cryoEM tutorial
+    output: web, pdf
+    type: frontmatter
+    folderitems:
+    - title:
+      url: /index.html
+      output: web, pdf
+      type: homepage
+
+    - title: Rosetta & CryoEM basics
+      url: /001_basics_main.html
+      output: web, pdf
+      type: frontmatter
