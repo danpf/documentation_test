@@ -89,19 +89,10 @@ Finally, one may choose to calculate density using either cryoEM or X-ray scatte
 Most simply, one may wish to simply score a model using Rosetta’s energy function including the density terms. This is easily accomplished using the `score_jd2` application. A sample command line to rescore the structure in density is given in `1_rosetta_basics/A_run_rescore.sh`. It illustrates the use of various density flags to provide Rosetta with experimental density information.
 
 
-{% include density_demo_files/1_rosetta_basics/A_run_rescore.sh %}
 ```
-$ROSETTA3/source/bin/score_jd2.macosclangrelease \ 
-  -database $ROSETTA3/database/ \
-  -in::file::s 1isrA.pdb 1issA.pdb \
-  -ignore_unrecognized_res \
-  -edensity::mapfile 1issA_6A.mrc \
-  -edensity::mapreso 5.0 \
-  -edensity::grid_spacing 2.0 \
-  -edensity::fastdens_wt 35.0 \
-  -edensity::cryoem_scatterers \
-  -crystal_refine
+{% include custom/density_demo_files/1_rosetta_basics/A_run_rescore.sh %}
 ```
+
 Some flags of note are boldfaced above. First, the input structure is provided with the command `-in::file::s` This is common to many Rosetta applications, and more than one input may be provided; each will be processed independently.
 
 The flags beginning with –edensity:: tell Rosetta about the density map into which it is being fit. The name of the mapfile (in CCP4 or MRC format), the resolution of the map, the grid sampling of the map (which should never be more than half the resolution), and the weights on the various fit-to-density scoring functions. These same flags are reused for many different protocols in addition to relax. Finally, the flag `-crystal_refine` the flag turns on several density-related options related to PDB reading and writing, and should always be used when refining against density data.
@@ -115,8 +106,33 @@ Alford RF, Leaver-Fay A, Jeliazkov JR, O'Meara MJ, DiMaio FP, Park H, Shapovalov
 
 ## Example 1B: Simple refinement into density using RosettaScripts and relax
 
-In this section we introduce RosettaScripts by way of a very simple refinement-into-density example. RosettaScripts provides an XML scripting interface to Rosetta that allows fine-grained control of protocols. The syntax is fully described in the Rosetta documentation; however, a very brief introduction is provided here. The basic syntax for the XML is illustrated here [TODO INSERT LINK TO ACTUAL XML](1_rosetta_basics/B_relax_density.xml)
+In this section we introduce RosettaScripts by way of a very simple refinement-into-density example. RosettaScripts provides an XML scripting interface to Rosetta that allows fine-grained control of protocols. The syntax is fully described in the Rosetta documentation; however, a very brief introduction is provided here. The basic syntax for the XML is illustrated here.
 
-{% include custom/rosetta_xml_001_B.xml %}
+```
+{% include custom/density_demo_files/1_rosetta_basics/B_relax_density.xml %}
+```
 
+There are three "blocks" of declarations in this script.
 
+In the first, `<SCOREFXNS> … </SCOREFXNS>`, the scorefunctions to be used throughout the protocol are declared.
+
+The second, `<MOVERS> … </MOVERS>`, movers – or atomic operations that modify a structure – are declared.
+
+The third, `<PROTOCOLS> … </PROTOCOLS>`, a full protocol is declared as a sequence of movers.
+
+In this particular example, we declare a single scorefunction, dens, which uses the score function `beta_cart` (a default score function, don’t need to worry about it), and turns on `elec_dens_fast`, the fit-to-density score, with a weight of 35. We then declare three movers, `SetupForDensityScoring`, `LoadDensityMap`, and `FastRelax`, which sets up the loaded structure for density scoring, loads a map into memory, and then refines the structure using the FastRelax protocol. The declared scorefunction, dens, is used as an input to the FastRelax mover.
+
+```
+{% include custom/density_demo_files/1_rosetta_basics/B_relax_density.sh %}
+```
+
+Note: We do not have to specify the density weight or the map file on the command line, since they are handled within the XML file. However, other density options must be specified on the command line. When using RosettaScripts, the density weights must be specified in the XML, the input map may be specified either way.
+
+Finally, in the previous XML file, the tag cartesian=1 appears, which refines the structure in Cartesian space. Rosetta also allows refinement in torsional space, which may be better for capturing domain motion, and for further reduction in model parameters against low-resolution data. To enable torsional refinement (1_rosetta_basics/C_relax_tors_density.xml), we make three small changes to the XML:
+
+### TODO how to bold inline?
+```
+{% include custom/density_demo_files/1_rosetta_basics/C_relax_tors_density.xml %}
+```
+
+end of tutorial one
