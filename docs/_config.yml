@@ -1,4 +1,4 @@
-repository: tomjoht/documentation-theme-jekyll
+repository: danpf/documentation_test
 
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
@@ -12,7 +12,7 @@ site_title: Dimaio lab CryoEM tutorials
 company_name: Dimaio lab
 # this appears in the footer
 
-github_editme_path: tomjoht/documentation-theme-jekyll/blob/gh-pages/
+github_editme_path: danpf/documentation_test/blob/master/
 # if you're using Github, provide the basepath to the branch you've created for reviews, following the sample here. if not, leave this value blank.
 
 host: 127.0.0.1
