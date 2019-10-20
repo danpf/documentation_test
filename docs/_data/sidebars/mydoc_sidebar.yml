@@ -19,3 +19,8 @@ entries:
       url: /001_basics_main.html
       output: web, pdf
       type: frontmatter
+
+    - title: Model refinement
+      url: /002_refinement_main.html
+      output: web, pdf
+      type: frontmatter
