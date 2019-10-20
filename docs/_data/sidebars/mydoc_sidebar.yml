@@ -24,3 +24,18 @@ entries:
       url: /002_refinement_main.html
       output: web, pdf
       type: frontmatter
+
+    - title: Model rebuilding
+      url: /003_rebuilding_main.html
+      output: web, pdf
+      type: frontmatter
+
+    - title: De-novo modeling
+      url: /004_denovo_main.html
+      output: web, pdf
+      type: frontmatter
+
+    - title: Rebuilding long segments
+      url: /005_ES_main.html
+      output: web, pdf
+      type: frontmatter
