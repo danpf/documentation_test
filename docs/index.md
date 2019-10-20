@@ -8,12 +8,20 @@ written by: Daniel Farrell, Brandon Frenz, Ray Y.-R. Wang, Frank DiMaio -- last 
 ---
 This tutorial is intended to introduce users to several different ways Rosetta may be used to solve various structure determination tasks given 3-5Å cryoEM density data. It is not intended to replace the user’s guide, available at [rosettacommons docs](https://www.rosettacommons.org/manuals/latest/main/).
 
+
+**to download this tutorial you can either**:
+```
+git clone https://github.com/danpf/documentation_test.git
+```
+**or visit** [this website](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/danpf/documentation_test/tree/master/docs/_includes/custom/density_demo_files)
+
 ## The tutorial is split up into four parts.
 1.  An introduction to Rosetta in general, showing how one may score structures and minimize structures guided by experimental density data
 2.  Our fragment-based refinement protocol for refinement against 3-5Å EM density
 3.  Our model rebuilding protocol (RosettaCM), where one wishes to recombine homologous structures, and rebuild small missing regions (<12 residues)
 4.  Our de novo model-building tools, where one wishes to rebuild missing regions of a structure (for example, from a homology model
 5.  Our model completion tools, where one wishes to complete a partial model built by the de novo tool or wishes to rebuild large missing regions (12 or more residues) 
+
 
 In each scenario, we present the most basic usage of Rosetta for the task, and then describe additional options that may be useful.
 
